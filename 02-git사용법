@@ -1,0 +1,36 @@
+3. git 설치하기
+ - https://git-scm.com/download/win <-- 여기에 들어가셔서 잠시 기다리시면 자동으로
+   다운로드 됩니다.
+ - 마찬가지로 특별한 위치에 설치하실거 아니라면 next만 눌러주시면 됩니다.
+ - 완료 뒤에 똑같이 커맨드창(cmd)에서 
+   git --version <-- 이렇게 치시고 버전나오면 정상입니다.
+
+- git --version : git 버전 확인하기 
+
+[새로운 저장소 만들기]
+cmd 에서 원하는 폴더로 들어간 후 
+- git init 
+  정상 이라면 새로운 저장소를 만들면 ./git 폴더가 생성됩니다.
+  
+repository를 만들고 repository에서 마오> 링크 복사 : https://github.com/ahsor/test 
+이렇게 발생된 주소를 붙여넣기
+로그인 되어있지 않다면 email, password, name 필요함
+
+- git clone { git url } 
+  기존의 github에 있는 저장소를 내 로컬로 복제할 수도 있습니다. 
+- git remote add origin 주소붙여넣기 : 원격 저장소 설정 
+
+[ readme 파일 만들기]
+-  echo "Hello, Git!" > README.md
+
+
+[ push ]
+- git remote add origin 주소 붙여넣기 
+또는
+현재 폴더에서 
+- git add . 
+- git commit -m 설명
+
+
+
+- git config --global ahsor

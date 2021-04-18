@@ -1,0 +1,95 @@
+1. 프로젝트 폴더 생성
+- mkdir express-test
+- cd express-test
+- code .
+
+2. server.js 만들기
+- vs에서 sever.js 파일을 만든 후 다음 코딩
+
+
+const express = require('express')
+
+const server = express()
+const mariadb = require('mariadb');
+
+const pool = mariadb.createPool({
+    host:'127.0.0.1',
+    user:'root',
+    database:'study',
+    password:'12345',
+    connectionLimit:5
+})
+server.get('/', async(req, res)=>{
+    //res.send('hello')
+    // hello 출력하기
+    
+    let conn;
+    try{
+        conn = await pool.getConnection();
+        const query = 'select * from user_info';
+        const rows = await conn.query(query);
+        res.json(rows);
+
+        console.log(rows);
+    }catch(err){
+        throw err;
+    }finally{
+        if(conn){
+            conn.end();
+        }
+    }
+    
+});
+
+server.get('/views/*', (req,res)=>{
+    res.sendFile(__dirname + req.url);
+})
+server.listen(80, ()=>{
+    console.log('server started')
+})
+
+3. express-test 모듈 작업
+- vs에서 views 폴더 만들기
+- vs에서 views 폴더 안에 user-list.html 파일 만들기
+- 다음과 같이 코딩 
+<body>
+    <div id="rDiv"></div>
+    <script>
+        window.onload = function(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','/');
+            xhr.onreadystatechange = function(){
+                var res = JSON.parse(xhr.responseText);
+                var html = '';
+                for( var user of res){
+                    html += `<li>번호 : ${user.ui_num}, 아이디 :${user.ui_id}`
+                }
+                html += '</ul>';
+                document.querySelector('#rDiv').innerHTML = html;
+            }
+            xhr.send();
+        }
+    </script>
+</body>
+
+3. 브라우저 실행 
+- 서버실행 npm start
+- 브라우저 열고 주소표시란에 다음 입력 후 실행 
+http://localhost/views/user-list.html
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+Compiled successfully!
+
+Compiled successfully!
+
+You can now view react-exam in the browser.      
+
+  Local:            http://localhost:3001        
+  On Your Network:  http://192.168.0.31:3001     
+
+Note that the development build is not optimized.
+To create a production build, use npm run build. 
+
+- Windows PowerShell에서 서버끄기 ctrl+c
+^C일괄 작업을 끝내시겠습니까 (Y/N)? You

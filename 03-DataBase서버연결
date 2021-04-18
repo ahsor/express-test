@@ -1,0 +1,27 @@
+[데이터베이스에 왔다갔다 할 수 없으니 서버로 연결하기]
+즉 package.json의  dependencies 등록하기
+"dependencies": {
+    "express": "^4.17.1",
+    "mariadb": "^2.5.3",
+    "mybatis-mapper": "^0.6.5"
+}
+1. cmd 창 열고 
+2. 프로젝트 폴더 생성
+- mkdir express-test
+- cd express-test
+
+3. npm 초기화 : package.json 을 만들어 맵핑하는 작업
+- npm init -y 
+
+4. 웹서버프레임워크 설치
+- npm -i --save express 또는- npm install express 
+
+5. mybatis-mapper설치
+HeidiSQL로 갔다가 vs로 와서 작업하고 왔다갔다 할 수 없으니 
+vs에서 db를 제어하고자 하여 mapper 설치 함
+- npm i -save mybatis-mapper
+
+6. 서버 소스 수정시 자동반영을 위한 패키지 설치
+- npm i --global nodemon
+- nodemon 설치 이후 vscode 종료 후 재실행
+- code .

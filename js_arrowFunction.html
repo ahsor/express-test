@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    
+    </style>
+</head>
+<body>
+    <h1></h1>
+    <script>
+        /*매개변수 없는 function*/
+        var arrowFunc1 = ()=>{ alert('hello1'); }
+        arrowFunc1();
+             
+        /*매개변수 1개이상 있는 function*/
+        var arrowFunc2 = (string)=>{ alert(string); }
+        arrowFunc2('hello2');
+        
+        /*매개변수 1개일때는 ()생략가능 function*/
+        var arrowFunc3 = string=>{ alert(string); }
+        arrowFunc3('hello3');
+        
+        /* var, let, const 
+           var 변수 재정의시 문제 발생
+           let 변수 재선언, 재할당 가능
+           const 변수 재선안, 재할당 모두 불가능 
+        */
+       
+        /*return 지정*/
+        var arrowFunc3 = string=>{ alert(string); }
+        arrowFunc3('hello3');
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+1. mariadb 연동
+ - url : https://mariadb.org/download/
+ - 조금 기다리시면 download버튼이 나오는데 해당 버튼 클릭해서 다운로드
+ - 설치하시면 됩니다.
+ * 설치시 주의사항 !!!!! : 넥스트를 누르다 보면
+  비밀번호 입력하는 곳이 나오는데 해당 비밀번호 반드시 외워야 하며
+  하단에 utf-8 케릭터셋으로 설치하는 옵션이 있습니다.
+  반드시 체크하시고 설치해야 하고 한글 안됩니다.
+ - 설치시 데이터 베이스 생성 폴더 확인하면 다음 폴더에 생성됨 
+   C:\Program Files\MariaDB 10.5\data
+ - 데이터베이스 문제로 재설치 후 재부팅 안해도 됨 
+ 
+2. HeidiSQL 사용 
+ - 윈도우 바탕화면의  HeidiSQL 열면 아래와 같은 화면 나옴
+ - 현재 커서의 쿼리문 실행은 ctrl+shift+F9 
+ - 쿼리문 전체 실행은 F9
+ - 블럭 지정된 쿼리문 실행은 ctrl + F9
+   CREATE DATABASE study;
+   입력 후 ; 앞으로 커서 이동 후 ctrl+shift+F9 
+   쿼리문 실행은 ;; 사이를 실행하는 이유로  ; 앞으로 이동 후 실행 
+
+ - 오타 없이 입력하였다면  왼쪽 스키마 창에서 F5(reflash) 하면 다음과 같은 창이 나오며 
+   아래 output 창에 다음과 같은 메시지 출력 
+   CREATE DATABASE study;
+   /* 영향 받은 행: 1  찾은 행: 0  경고: 0  지속 시간 1 쿼리: 0.000 초 */
+ - C:\Program Files\MariaDB 10.5\data폴더 확인하면 study 폴더가 생성되어 있음 
+
+ - 테이블 생성 
+   CREATE TABLE user_info(
+    ui_num INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ui_id VARCHAR(30) NOT null UNIQUE,
+    ui_pwd VARCHAR(30) NOT null
+    );
+    /* UNIQUE 유일키 지정, 이키값이 중복되면 데이터 입력이 안됨 */
+ - 데이터 입력 
+   INSERT INTO user_info(ui_id, ui_pwd) values('test', 'test');
+    /* values속성에 복수형 s 주의 */
+ - 데이터 검색 
+   SELECT * from user_info;
+
+ - 위 명령어 실행 후 output 결과 
+ /* 127.0.0.1 에 MariaDB (TCP/IP) 을(를) 통해 연결 중, 사용자 이름 "root", 암호 사용: Yes… */
+SELECT CONNECTION_ID();
+/* 연결됨. 스레드-ID: 3 */
+/* 문자 집합: utf8mb4 */
+SHOW STATUS;
+SELECT NOW();
+SHOW VARIABLES;
+SHOW DATABASES;
+SHOW OPEN TABLES FROM mysql WHERE `in_use`!=0;
+USE `mysql`;
+/* "Unnamed" 세션 시작 */
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='mysql';
+SHOW TABLE STATUS FROM `mysql`;
+SHOW FUNCTION STATUS WHERE `Db`='mysql';
+SHOW PROCEDURE STATUS WHERE `Db`='mysql';
+SHOW TRIGGERS FROM `mysql`;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='information_schema';
+SHOW TABLE STATUS FROM `information_schema`;
+SHOW FUNCTION STATUS WHERE `Db`='information_schema';
+SHOW PROCEDURE STATUS WHERE `Db`='information_schema';
+SHOW TRIGGERS FROM `information_schema`;
+SHOW EVENTS FROM `information_schema`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='mysql';
+/* 영향 받은 행: 0  찾은 행: 0  경고: 0  지속 시간 0 쿼리: 0.000 초 */
+SHOW DATABASES;
+/* "Unnamed" 세션 시작 */
+CREATE DATABASE study;
+/* 영향 받은 행: 1  찾은 행: 0  경고: 0  지속 시간 1 쿼리: 0.000 초 */
+SHOW DATABASES;
+/* "Unnamed" 세션 시작 */
+USE `study`;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='study';
+SHOW TABLE STATUS FROM `study`;
+SHOW FUNCTION STATUS WHERE `Db`='study';
+SHOW PROCEDURE STATUS WHERE `Db`='study';
+SHOW TRIGGERS FROM `study`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='study';
+
+CREATE TABLE user_info(
+ui_num INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ui_id VARCHAR(30) NOT null UNIQUE,
+ui_pwd VARCHAR(30) NOT null
+);
+/* 영향 받은 행: 0  찾은 행: 0  경고: 0  지속 시간 1 쿼리: 0.032 초 */
+
+INSERT INTO user_info(ui_id, ui_pwd) 
+values('test', 'test');
+/* 영향 받은 행: 1  찾은 행: 0  경고: 0  지속 시간 1 쿼리: 0.015 초 */
+SELECT * from user_info;
+/* 영향 받은 행: 0  찾은 행: 1  경고: 0  지속 시간 1 쿼리: 0.000 초 */
+
+[sql 기초]
+1. DDL : 데이터 정의어 ( Data Defind Language )
+ - schema, domain, table, view, index를 정의하거나 변경 또는 삭제하기 위한 명령어
+ - DB관리자나 설계자가 사용
+   CREATE TABLE : 테이블 생성
+   ALTER TABLE : 테이블 구조 변경
+   DROP TABLE : 테이블 삭제
+ 
+2. DML : 데이터 조작어 ( Data Manipulation Language)
+ - 데이터베이스 사용자가 응용프로그램이나 질의어를 통하여 저장된 데이터를 처리하는 언어
+SELECT  데이터 조회
+INSERT  데이터 삽입
+DELETE  데이터 삭제 
+UPDATE  데이터 수정 
+
+3. DCL : 데이터 제어어 ( Data Control Language)
+ - 데이터의 보안, 무결성, 데이터 회복, 병행 수행 제어 등을 정의 하는 언어
+ - 데이터 베이스 관리자가 DB를 관리하는 것이 목적 
+ - commit , rollback, grunt, revoke 
