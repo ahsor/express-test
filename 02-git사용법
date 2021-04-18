@@ -34,3 +34,41 @@ repository를 만들고 repository에서 마오> 링크 복사 : https://github.
 
 
 - git config --global ahsor
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+새로운 크로스 플랫폼 PowerShell 사용 https://aka.ms/pscore6
+
+PS C:\works> cd .\my-test\ 
+PS C:\works\my-test> git init   
+Reinitialized existing Git repository in C:/works/my-test/.git/
+PS C:\works\my-test> git remote add origin https://github.com/ahsor/express-test.git
+PS C:\works\my-test> git add *
+PS C:\works\my-test> git commit -m "test"
+[master d9af70f] test
+ 13 files changed, 549 insertions(+)
+ create mode 100644 "02-DataBase \354\202\254\354\232\251\355\225\230\352\270\260"
+ create mode 100644 "02-git\354\202\254\354\232\251\353\262\225"
+ create mode 100644 "03-DataBase\354\204\234\353\262\204\354\227\260\352\262\260"
+ create mode 100644 "03-DataBase\354\204\234\353\262\204\354\227\260\352\262\260-1"
+ create mode 100644 "04-html\353\215\260\354\235\264\355\203\200\354\227\260\353\217\231"
+ create mode 100644 "05-npm\353\252\205\353\240\271\354\226\264"
+ create mode 100644 "06-\353\246\254\354\227\221\355\212\270"
+ create mode 100644 Windows PowerShell.hwp
+ create mode 100644 dataBase.hwp
+ create mode 100644 js_arrowFunction.html
+ create mode 100644 js_for.html
+ create mode 100644 js_varLetConst.html
+ create mode 100644 myserver.js
+PS C:\works\my-test> git push origin master
+Enumerating objects: 19, done.
+Counting objects: 100% (19/19), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (19/19), done.
+Writing objects: 100% (19/19), 47.17 KiB | 1.96 MiB/s, done.
+Total 19 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), done.
+To https://github.com/ahsor/express-test.git
+ * [new branch]      master -> master
+PS C:\works\my-test>
